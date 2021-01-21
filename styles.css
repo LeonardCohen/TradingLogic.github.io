@@ -1,0 +1,12 @@
+.main-container {
+    max-width: 1600px !important;
+}
+
+.html-widget {
+  margin-bottom: 2px !important;
+}
+
+.tippy-tooltip {
+  font-size: 1.2rem !important;
+  padding: 0.3rem 0.6rem;
+}

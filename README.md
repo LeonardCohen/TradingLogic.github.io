@@ -1,1 +1,0 @@
-# TradingLogic.github.io
