@@ -149,6 +149,20 @@
       "Repository": "CRAN",
       "Hash": "0f22be39ec1d141fd03683c06f3a6e67"
     },
+    "corrplot": {
+      "Package": "corrplot",
+      "Version": "0.84",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "b55c32ae818a84109a51f172290c95f2"
+    },
+    "countrycode": {
+      "Package": "countrycode",
+      "Version": "1.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c46036853ef73486af84ec5dc5b2443f"
+    },
     "cpp11": {
       "Package": "cpp11",
       "Version": "0.2.5",
@@ -204,6 +218,13 @@
       "Source": "Repository",
       "Repository": "RSPM",
       "Hash": "365f8c3650ab95582e600f160fd5fb88"
+    },
+    "echarts4r": {
+      "Package": "echarts4r",
+      "Version": "0.3.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "412e3766971a562bba056a9b2fc90a52"
     },
     "ellipsis": {
       "Package": "ellipsis",
