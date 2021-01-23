@@ -198,6 +198,13 @@
       "Repository": "CRAN",
       "Hash": "6c8fe8fa26a23b79949375d372c7b395"
     },
+    "details": {
+      "Package": "details",
+      "Version": "0.2.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "7a18f9d2e53a960aafbe25c043ec3f52"
+    },
     "diffobj": {
       "Package": "diffobj",
       "Version": "0.3.3",
@@ -211,6 +218,18 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "a0cbe758a531d054b537d16dff4d58a1"
+    },
+    "discordr": {
+      "Package": "discordr",
+      "Version": "0.0.0.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "EriqLaplus",
+      "RemoteRepo": "discordr",
+      "RemoteRef": "master",
+      "RemoteSha": "048c99c9bd1c6c8c70ca3d8fcae6006792b4ae9b",
+      "Hash": "6e24b2efbb0fb982bb3fecc6d395aee3"
     },
     "dplyr": {
       "Package": "dplyr",
@@ -408,6 +427,13 @@
       "Repository": "CRAN",
       "Hash": "5b5b02f621d39a499def7923a5aee746"
     },
+    "magick": {
+      "Package": "magick",
+      "Version": "2.6.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "ffc87958461a1d2a5ec4b36035b87b94"
+    },
     "magrittr": {
       "Package": "magrittr",
       "Version": "2.0.1",
@@ -491,6 +517,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "b6b150cd4709e0c0c9b5d51ac4376282"
+    },
+    "png": {
+      "Package": "png",
+      "Version": "0.1-7",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "03b7076c234cb3331288919983326c55"
     },
     "praise": {
       "Package": "praise",
@@ -681,6 +714,13 @@
       "Repository": "CRAN",
       "Hash": "0759e6b6c0957edb1311028a49a35e76"
     },
+    "svgPanZoom": {
+      "Package": "svgPanZoom",
+      "Version": "0.3.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "76048f6726a1bcc497e34b86c01cf941"
+    },
     "sys": {
       "Package": "sys",
       "Version": "3.4",
@@ -694,6 +734,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "17826764cb92d8b5aae6619896e5a161"
+    },
+    "texPreview": {
+      "Package": "texPreview",
+      "Version": "1.5",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "bf5d1879cf1410d925989cd2ba824848"
     },
     "tibble": {
       "Package": "tibble",
