@@ -271,10 +271,10 @@ $(document).ready(function () {
 
 
 
-
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
+      <!-- NOTE: add "navbar-inverse" class for an alternate navbar background -->
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -284,60 +284,44 @@ $(document).ready(function () {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="MarketDashboard.html">
-    <span class="fas fa-tachometer"></span>
-     
-    Market Dashboard
-  </a>
-</li>
-<li>
-  <a href="https://www.tradingview.com/u/TradiKator/">TradiKator</a>
-</li>
-<li>
-  <a href="about.html">About</a>
-</li>
-<li>
-  <a href="https://www.notion.so/Trading-Logic-2774586e2c6b480690809f6dc2ea664a">
-    <span class="fas fa-info"></span>
-     
-    
-  </a>
-</li>
-<li>
-  <a href="https://discord.gg/VcBMWR5GnY">
-    <span class="fas fa-comments"></span>
-     
-    
-  </a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fas fa-user"></span>
-     
-    LEI &amp; LoneCapital
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="https://lonecapital.com">Blog</a>
-    </li>
-    <li>
-      <a href="https://www.youtube.com/c/leilonecapital">Youtube</a>
-    </li>
-    <li>
-      <a href="https://twitter.com/lonecapital/">Twitter</a>
-    </li>
-    <li class="divider"></li>
-    <li>
-      <a href="https://space.bilibili.com/588472826?from=search&amp;seid=17851495204245215345">墙内：bilibili</a>
-    </li>
-  </ul>
-</li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="MarketDashboard.html"><span class="fas fa-tachometer"></span>Market Dashboard</a></li>
+        <li><a href="https://www.tradingview.com/u/TradiKator/">TradiKator</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://www.notion.so/Trading-Logic-2774586e2c6b480690809f6dc2ea664a">
+            <span class="fas fa-info"></span> 
         
+           &nbsp;
+            More & About
+            </a>
+        </li>
+        <li><a href="https://discord.gg/VcBMWR5GnY"><span class="fas fa-comments"></span></a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            <span class="fas fa-user"></span>
+             &nbsp;
+            LEI &amp; LoneCapital
+             
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <a href="https://lonecapital.com">Blog</a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/c/leilonecapital">Youtube</a>
+            </li>
+            <li>
+              <a href="https://twitter.com/lonecapital/">Twitter</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="https://space.bilibili.com/588472826?from=search&amp;seid=17851495204245215345">墙内：bilibili</a>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#support" data-toggle="modal" data-target="#support"><span class="fas fa-heart"></span></a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -355,6 +339,37 @@ $(document).ready(function () {
 <p>We trade with Logic and Knowledge.</p>
 <p>We are global team of experts.</p>
 
+<!-- The modal -->
+<div class="modal fade" id="support" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+<h4 class="modal-title" id="modalLabel">Support US | 支持我们</h4>
+</div>
+<div class="modal-body">
+<p>你的支持 = 我们的动力 = 新的功能</p>
+<p>Your Support = Our Motivation = New Features</p>
+<p>支持款项将用于购买收费数据及相关服务</p>
+<p>The fund will be used to purchase data and relevant service</p>
+<p>
+  <img src="img/support_wechat.jpg" alt="Support Wechat" style="height:400px;">  
+</p>
+<br>
+<p>
+  <a href="https://paypal.me/LeoYuDe">
+    <img src="img/bdg_secured_by_pp_2line.webp" alt="paypal" style="height:50px;">
+  </a>
+</p>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
 
 
 
