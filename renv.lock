@@ -58,6 +58,13 @@
       "Repository": "RSPM",
       "Hash": "dbb5e436998a7eba5a9d682060533338"
     },
+    "RcppRoll": {
+      "Package": "RcppRoll",
+      "Version": "0.3.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "84a03997fbb5acfb3c9b43bad88fea1f"
+    },
     "askpass": {
       "Package": "askpass",
       "Version": "1.1",
