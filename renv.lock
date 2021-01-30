@@ -247,10 +247,15 @@
     },
     "echarts4r": {
       "Package": "echarts4r",
-      "Version": "0.3.3",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "412e3766971a562bba056a9b2fc90a52"
+      "Version": "0.4.0.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "JohnCoene",
+      "RemoteRepo": "echarts4r",
+      "RemoteRef": "master",
+      "RemoteSha": "d22644eba540cc23856857059a70fca328c5653f",
+      "Hash": "3e8a44f119e2ce6b269b6b164a7a2133"
     },
     "ellipsis": {
       "Package": "ellipsis",
