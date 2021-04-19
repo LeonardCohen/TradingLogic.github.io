@@ -58,3 +58,16 @@
   font-size: 15px;
   font-weight: 400;
 }
+
+
+
+
+.gutter-2 > [class^="col-"], .gutter-2 > [class^=" col-"] {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.gutter-2 > [class^="col-"] > [class^="col-"], .gutter-2 > [class^=" col-"] > [class^=" col-"] {
+    padding-right: 5px;
+    padding-left: 5px;
+}
