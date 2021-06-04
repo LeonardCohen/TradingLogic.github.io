@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>MarketDashboard</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QEJH2B8L8V"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QEJH2B8L8V');
+  gtag('config', 'UA-188253941-1');
+</script>
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="manifest" href="/img/site.webmanifest">
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/img/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/img/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- NOTE: add "navbar-inverse" class for an alternate navbar background -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><img src="img/favicon-32x32.png" alt="icon" style="width:25px;height:25px;"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Breadth</a></li>
+        <li><a href="MarketDashboard.html"><span class="fas fa-tachometer"></span>Market Dashboard</a></li>
+        <li><a href="ShortInterest.html">Short Interest</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            <span class="fas fa-th"></span>
+            &nbsp;
+            Scanner
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+
+            <li><a href="https://scanner.trading-logic.com">Scanner</a>
+            <li><a href="sp100.html"><span class="fas fa-tachometer"></span>S&P100</a></li>
+          </ul>
+        </li>
+        <li><a href="https://www.trading-logic.com/wiki/trading-indicator.html">TradiKator</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://www.trading-logic.com/wiki/">
+            <span class="fas fa-info"></span>
+
+            &nbsp;
+            Wiki
+          </a>
+        </li>
+        <li><a href="https://discord.gg/puuGubskvt"><span class="far fa-bell"></span>&nbsp;A股+建议</a></li>
+        <!-- <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            <span class="fas fa-graduation-cap"></span>
+            &nbsp;
+            LEI &amp; LoneCapital
+
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <a href="https://lonecapital.com">Blog</a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/c/leilonecapital">Youtube</a>
+            </li>
+            <li>
+              <a href="https://twitter.com/lonecapital/">Twitter</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="https://space.bilibili.com/588472826?from=search&amp;seid=17851495204245215345">bilibili</a>
+            </li>
+          </ul>
+        </li> -->
+        <li><a href="#support" data-toggle="modal" data-target="#support"><span style="color:red"
+              class="far fa-heart"></span>&nbsp;SupportUs</a>
+        </li>
+      </ul>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+  <!--/.container -->
+</div>
+<!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">MarketDashboard</h1>
+
+</div>
+
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Ticker
+</th>
+<th style="text-align:left;">
+Company
+</th>
+<th style="text-align:left;">
+Exchange
+</th>
+<th style="text-align:left;">
+ShortInt
+</th>
+<th style="text-align:left;">
+Float
+</th>
+<th style="text-align:left;">
+Outstd
+</th>
+<th style="text-align:left;">
+Industry
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=WKHS"> WKHS </a>
+</td>
+<td style="text-align:left;">
+Workhorse Group Inc
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(67, 191, 113, 1) !important;">
+41.93%
+</td>
+<td style="text-align:left;">
+113.38M
+</td>
+<td style="text-align:left;">
+123.26M
+</td>
+<td style="text-align:left;">
+Auto &amp; Truck Manufacturers
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=CLOV"> CLOV </a>
+</td>
+<td style="text-align:left;">
+Clover Health Investments Corp
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(32, 147, 140, 1) !important;">
+36.10%
+</td>
+<td style="text-align:left;">
+112.06M
+</td>
+<td style="text-align:left;">
+148.28M
+</td>
+<td style="text-align:left;">
+Healthcare Facilities
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=BLNK"> BLNK </a>
+</td>
+<td style="text-align:left;">
+Blink Charging Co
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(32, 146, 140, 1) !important;">
+35.88%
+</td>
+<td style="text-align:left;">
+36.14M
+</td>
+<td style="text-align:left;">
+41.98M
+</td>
+<td style="text-align:left;">
+Utilities - Electric
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=GEO"> GEO </a>
+</td>
+<td style="text-align:left;">
+The GEO Group Inc
+</td>
+<td style="text-align:left;">
+NYSE
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(36, 135, 142, 1) !important;">
+34.53%
+</td>
+<td style="text-align:left;">
+116.80M
+</td>
+<td style="text-align:left;">
+121.63M
+</td>
+<td style="text-align:left;">
+REITs - Specialized
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=FUV"> FUV </a>
+</td>
+<td style="text-align:left;">
+Arcimoto Inc
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(44, 115, 142, 1) !important;">
+32.07%
+</td>
+<td style="text-align:left;">
+26.84M
+</td>
+<td style="text-align:left;">
+35.78M
+</td>
+<td style="text-align:left;">
+Auto &amp; Truck Manufacturers
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=BBBY"> BBBY </a>
+</td>
+<td style="text-align:left;">
+Bed Bath &amp; Beyond Inc. 
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(44, 113, 142, 1) !important;">
+31.81%
+</td>
+<td style="text-align:left;">
+103.38M
+</td>
+<td style="text-align:left;">
+106.63M
+</td>
+<td style="text-align:left;">
+Retail (Specialty Non-Apparel)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=ROOT"> ROOT </a>
+</td>
+<td style="text-align:left;">
+Root Inc
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(44, 113, 142, 1) !important;">
+31.79%
+</td>
+<td style="text-align:left;">
+51.28M
+</td>
+<td style="text-align:left;">
+86.89M
+</td>
+<td style="text-align:left;">
+Insurance - Multiline &amp; Brokers
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=CLVS"> CLVS </a>
+</td>
+<td style="text-align:left;">
+Clovis Oncology Inc
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(48, 107, 142, 1) !important;">
+30.85%
+</td>
+<td style="text-align:left;">
+101.90M
+</td>
+<td style="text-align:left;">
+104.56M
+</td>
+<td style="text-align:left;">
+Biotechnology &amp; Drugs
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=OTRK"> OTRK </a>
+</td>
+<td style="text-align:left;">
+Ontrak, Inc. 
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(49, 102, 142, 1) !important;">
+30.30%
+</td>
+<td style="text-align:left;">
+8.04M
+</td>
+<td style="text-align:left;">
+18.33M
+</td>
+<td style="text-align:left;">
+Healthcare Facilities
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=GOGO"> GOGO </a>
+</td>
+<td style="text-align:left;">
+Gogo Inc
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(51, 100, 141, 1) !important;">
+30.01%
+</td>
+<td style="text-align:left;">
+45.34M
+</td>
+<td style="text-align:left;">
+109.61M
+</td>
+<td style="text-align:left;">
+Communications Services
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=SDC"> SDC </a>
+</td>
+<td style="text-align:left;">
+SmileDirectClub Inc
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(51, 98, 141, 1) !important;">
+29.83%
+</td>
+<td style="text-align:left;">
+103.08M
+</td>
+<td style="text-align:left;">
+118.25M
+</td>
+<td style="text-align:left;">
+Medical Equipment, Supplies &amp; Distribution
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=PETS"> PETS </a>
+</td>
+<td style="text-align:left;">
+Petmed Express Inc
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(52, 97, 141, 1) !important;">
+29.66%
+</td>
+<td style="text-align:left;">
+19.58M
+</td>
+<td style="text-align:left;">
+20.27M
+</td>
+<td style="text-align:left;">
+Retail (Drugs)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=REV"> REV </a>
+</td>
+<td style="text-align:left;">
+Revlon Inc
+</td>
+<td style="text-align:left;">
+NYSE
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(53, 95, 141, 1) !important;">
+29.54%
+</td>
+<td style="text-align:left;">
+6.97M
+</td>
+<td style="text-align:left;">
+53.49M
+</td>
+<td style="text-align:left;">
+Personal &amp; Household Products
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=GDRX"> GDRX </a>
+</td>
+<td style="text-align:left;">
+Goodrx Holdings Inc
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(58, 85, 140, 1) !important;">
+28.30%
+</td>
+<td style="text-align:left;">
+58.15M
+</td>
+<td style="text-align:left;">
+69.56M
+</td>
+<td style="text-align:left;">
+Online Services
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=LCI"> LCI </a>
+</td>
+<td style="text-align:left;">
+Lannett Company, Inc. 
+</td>
+<td style="text-align:left;">
+NYSE
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(59, 82, 139, 1) !important;">
+28.07%
+</td>
+<td style="text-align:left;">
+31.28M
+</td>
+<td style="text-align:left;">
+41.45M
+</td>
+<td style="text-align:left;">
+Biotechnology &amp; Drugs
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=INO"> INO </a>
+</td>
+<td style="text-align:left;">
+Inovio Pharmaceuticals Inc
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(61, 77, 138, 1) !important;">
+27.35%
+</td>
+<td style="text-align:left;">
+204.75M
+</td>
+<td style="text-align:left;">
+208.31M
+</td>
+<td style="text-align:left;">
+Biotechnology &amp; Medical Research
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=TR"> TR </a>
+</td>
+<td style="text-align:left;">
+Tootsie Roll Industries, Inc. 
+</td>
+<td style="text-align:left;">
+NYSE
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(64, 70, 136, 1) !important;">
+26.72%
+</td>
+<td style="text-align:left;">
+14.33M
+</td>
+<td style="text-align:left;">
+40.52M
+</td>
+<td style="text-align:left;">
+Food Processing
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=CRTX"> CRTX </a>
+</td>
+<td style="text-align:left;">
+Cortexyme Inc
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(65, 67, 135, 1) !important;">
+26.39%
+</td>
+<td style="text-align:left;">
+14.35M
+</td>
+<td style="text-align:left;">
+29.59M
+</td>
+<td style="text-align:left;">
+Biotechnology &amp; Medical Research
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=PRTS"> PRTS </a>
+</td>
+<td style="text-align:left;">
+Carparts.Com Inc
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(67, 61, 132, 1) !important;">
+25.70%
+</td>
+<td style="text-align:left;">
+35.58M
+</td>
+<td style="text-align:left;">
+48.09M
+</td>
+<td style="text-align:left;">
+Retailers - Auto Vehicles, Parts &amp; Service
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=BYND"> BYND </a>
+</td>
+<td style="text-align:left;">
+Beyond Meat Inc
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(69, 56, 130, 1) !important;">
+25.21%
+</td>
+<td style="text-align:left;">
+55.76M
+</td>
+<td style="text-align:left;">
+63.06M
+</td>
+<td style="text-align:left;">
+Food Processing
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=PGEN"> PGEN </a>
+</td>
+<td style="text-align:left;">
+Precigen, Inc
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(69, 53, 129, 1) !important;">
+25.02%
+</td>
+<td style="text-align:left;">
+94.73M
+</td>
+<td style="text-align:left;">
+206.41M
+</td>
+<td style="text-align:left;">
+Biotechnology &amp; Medical Research
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=CVM"> CVM </a>
+</td>
+<td style="text-align:left;">
+CEL-SCI Corporation
+</td>
+<td style="text-align:left;">
+AMEX
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(69, 53, 129, 1) !important;">
+25.00%
+</td>
+<td style="text-align:left;">
+38.87M
+</td>
+<td style="text-align:left;">
+40.91M
+</td>
+<td style="text-align:left;">
+Biotechnology &amp; Medical Research
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=DGLY"> DGLY </a>
+</td>
+<td style="text-align:left;">
+Digital Ally, Inc. 
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(70, 52, 128, 1) !important;">
+24.82%
+</td>
+<td style="text-align:left;">
+27.70M
+</td>
+<td style="text-align:left;">
+51.51M
+</td>
+<td style="text-align:left;">
+Communications &amp; Networking
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=KDMN"> KDMN </a>
+</td>
+<td style="text-align:left;">
+Kadmon Holdings Inc
+</td>
+<td style="text-align:left;">
+NYSE
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(70, 51, 127, 1) !important;">
+24.75%
+</td>
+<td style="text-align:left;">
+165.87M
+</td>
+<td style="text-align:left;">
+171.97M
+</td>
+<td style="text-align:left;">
+Pharmaceuticals
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=SPCE"> SPCE </a>
+</td>
+<td style="text-align:left;">
+Virgin Galactic Holdings Inc
+</td>
+<td style="text-align:left;">
+NYSE
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(71, 45, 123, 1) !important;">
+24.12%
+</td>
+<td style="text-align:left;">
+163.64M
+</td>
+<td style="text-align:left;">
+240.71M
+</td>
+<td style="text-align:left;">
+Aerospace &amp; Defense
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=QS"> QS </a>
+</td>
+<td style="text-align:left;">
+Quantumscape Corp
+</td>
+<td style="text-align:left;">
+NYSE
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(72, 41, 121, 1) !important;">
+23.83%
+</td>
+<td style="text-align:left;">
+139.54M
+</td>
+<td style="text-align:left;">
+259.64M
+</td>
+<td style="text-align:left;">
+Auto, Truck &amp; Motorcycle Parts
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=TRIT"> TRIT </a>
+</td>
+<td style="text-align:left;">
+Triterras Inc
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(72, 39, 119, 1) !important;">
+23.56%
+</td>
+<td style="text-align:left;">
+23.25M
+</td>
+<td style="text-align:left;">
+83.20M
+</td>
+<td style="text-align:left;">
+Fintech
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=AXDX"> AXDX </a>
+</td>
+<td style="text-align:left;">
+Accelerate Diagnostics Inc
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(72, 37, 119, 1) !important;">
+23.44%
+</td>
+<td style="text-align:left;">
+33.97M
+</td>
+<td style="text-align:left;">
+61.04M
+</td>
+<td style="text-align:left;">
+Scientific &amp; Technical Instruments
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=ICPT"> ICPT </a>
+</td>
+<td style="text-align:left;">
+Intercept Pharmaceuticals Inc
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(72, 31, 112, 1) !important;">
+22.76%
+</td>
+<td style="text-align:left;">
+27.46M
+</td>
+<td style="text-align:left;">
+33.16M
+</td>
+<td style="text-align:left;">
+Biotechnology &amp; Medical Research
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=KPTI"> KPTI </a>
+</td>
+<td style="text-align:left;">
+Karyopharm Therapeutics Inc
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(72, 31, 112, 1) !important;">
+22.74%
+</td>
+<td style="text-align:left;">
+65.37M
+</td>
+<td style="text-align:left;">
+75.09M
+</td>
+<td style="text-align:left;">
+Biotechnology &amp; Medical Research
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=ASO"> ASO </a>
+</td>
+<td style="text-align:left;">
+Academy Sports &amp; Outdoors Inc
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(72, 28, 111, 1) !important;">
+22.59%
+</td>
+<td style="text-align:left;">
+55.59M
+</td>
+<td style="text-align:left;">
+93.80M
+</td>
+<td style="text-align:left;">
+Retailers - Apparel &amp; Accessories
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=OMER"> OMER </a>
+</td>
+<td style="text-align:left;">
+Omeros Corporation
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(72, 27, 109, 1) !important;">
+22.34%
+</td>
+<td style="text-align:left;">
+59.73M
+</td>
+<td style="text-align:left;">
+62.33M
+</td>
+<td style="text-align:left;">
+Biotechnology &amp; Drugs
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=VXRT"> VXRT </a>
+</td>
+<td style="text-align:left;">
+Vaxart Inc
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(71, 13, 96, 1) !important;">
+21.21%
+</td>
+<td style="text-align:left;">
+121.55M
+</td>
+<td style="text-align:left;">
+117.77M
+</td>
+<td style="text-align:left;">
+Biotechnology &amp; Medical Research
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=CVNA"> CVNA </a>
+</td>
+<td style="text-align:left;">
+Carvana Co
+</td>
+<td style="text-align:left;">
+NYSE
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(71, 12, 95, 1) !important;">
+21.12%
+</td>
+<td style="text-align:left;">
+78.57M
+</td>
+<td style="text-align:left;">
+78.33M
+</td>
+<td style="text-align:left;">
+Retail (Specialty Non-Apparel)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=FUBO"> FUBO </a>
+</td>
+<td style="text-align:left;">
+Fubotv Inc
+</td>
+<td style="text-align:left;">
+NYSE
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(70, 11, 94, 1) !important;">
+21.11%
+</td>
+<td style="text-align:left;">
+109.41M
+</td>
+<td style="text-align:left;">
+140.47M
+</td>
+<td style="text-align:left;">
+Online Services
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=SKT"> SKT </a>
+</td>
+<td style="text-align:left;">
+Tanger Factory Outlet Centers
+</td>
+<td style="text-align:left;">
+NYSE
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(70, 11, 94, 1) !important;">
+21.04%
+</td>
+<td style="text-align:left;">
+97.74M
+</td>
+<td style="text-align:left;">
+100.80M
+</td>
+<td style="text-align:left;">
+Real Estate Operations
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=GME"> GME </a>
+</td>
+<td style="text-align:left;">
+GameStop Corp. 
+</td>
+<td style="text-align:left;">
+NYSE
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(70, 10, 93, 1) !important;">
+21.00%
+</td>
+<td style="text-align:left;">
+57.00M
+</td>
+<td style="text-align:left;">
+70.03M
+</td>
+<td style="text-align:left;">
+Retail (Technology)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=GTT"> GTT </a>
+</td>
+<td style="text-align:left;">
+GTT Communications Inc
+</td>
+<td style="text-align:left;">
+NYSE
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(69, 4, 87, 1) !important;">
+20.48%
+</td>
+<td style="text-align:left;">
+46.10M
+</td>
+<td style="text-align:left;">
+58.82M
+</td>
+<td style="text-align:left;">
+IT Services &amp; Consulting
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=MSTR"> MSTR </a>
+</td>
+<td style="text-align:left;">
+MicroStrategy Inc
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(68, 3, 86, 1) !important;">
+20.40%
+</td>
+<td style="text-align:left;">
+7.78M
+</td>
+<td style="text-align:left;">
+7.62M
+</td>
+<td style="text-align:left;">
+Software &amp; Programming
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=SENS"> SENS </a>
+</td>
+<td style="text-align:left;">
+Senseonics Holdings Inc
+</td>
+<td style="text-align:left;">
+AMEX
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(68, 1, 86, 1) !important;">
+20.31%
+</td>
+<td style="text-align:left;">
+357.23M
+</td>
+<td style="text-align:left;">
+428.07M
+</td>
+<td style="text-align:left;">
+Medical Equipment &amp; Supplies
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=SRNE"> SRNE </a>
+</td>
+<td style="text-align:left;">
+Sorrento Therapeutics Inc
+</td>
+<td style="text-align:left;">
+Nasdaq
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(68, 1, 86, 1) !important;">
+20.28%
+</td>
+<td style="text-align:left;">
+263.37M
+</td>
+<td style="text-align:left;">
+286.65M
+</td>
+<td style="text-align:left;">
+Biotechnology &amp; Medical Research
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<a href="https://www.tradingview.com/chart?symbol=RVP"> RVP </a>
+</td>
+<td style="text-align:left;">
+Retractable Technologies, Inc. 
+</td>
+<td style="text-align:left;">
+AMEX
+</td>
+<td style="text-align:left;color: white !important;background-color: rgba(68, 1, 84, 1) !important;">
+20.22%
+</td>
+<td style="text-align:left;">
+16.53M
+</td>
+<td style="text-align:left;">
+34.00M
+</td>
+<td style="text-align:left;">
+Medical Equipment, Supplies &amp; Distribution
+</td>
+</tr>
+</tbody>
+</table>
+
+<!-- The modal -->
+<div class="modal fade" id="support" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="modalLabel">Support US | 支持我们</h4>
+      </div>
+      <div class="modal-body">
+        <p>你的支持 = 我们的动力 = 新的功能</p>
+        <p>Your Support = Our Motivation = New Features</p>
+        <p>支持款项将用于购买收费数据及相关服务</p>
+        <p>The fund will be used to purchase data and relevant service</p>
+        <p>
+          所有用户希望使用Scanner的，打赏前请先在scanner上注册，打赏时候注明在scanner上注册的邮箱或投资人社区ID。如果有问题联系我们的outlook邮箱：support@trading-logic.com。48h内将开通登录。
+        </p>
+        <p>
+          细节请参阅<a href="https://www.trading-logic.com/wiki/support-us.html">公告</a>。
+        </p>
+        <!-- <p>
+          <img src="img/support_wechat_trader.png" alt="Support Wechat" style="width:400px">
+        </p> -->
+        <br>
+        <p>
+          <a href="https://paypal.me/yjin88">
+            <img src="img/bdg_secured_by_pp_2line.webp" alt="paypal" style="height:50px;">
+          </a>
+        </p>
+        <h2>鸣谢</h2>
+        <p>
+          本站的建立，有赖众多友人的支持和交流。同时借鉴学习了很多内容创作高手的分享，特此感谢:
+        </p>
+        <ul>
+          <li><a href="https://lonecapital.com/">LoneCapital</a></li>
+          <li>Leonardo</li>
+          <li><a href="https://www.notion.so/Trading-Indicator-0fc84f77f63c4ad680c6b8a00260942b">TradiKator</a></li>
+          <li><a href="https://space.bilibili.com/431790066/article">jchang274</a></li>
+        </ul>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<p style="text-align:center;">Copyright &copy; 2021 TradingLogic. All rights reserved.
+    <br>
+    <small>All content provided by Trading-Logic is only for informational purposes, and not intended for trading or
+        investing purposes.
+    </small>
+    <br>
+    <small>
+        <a href="https://www.trading-logic.com/wiki/agb-und-datenschutz.html">AGB und Datenschutz</a>
+    </small>
+</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
