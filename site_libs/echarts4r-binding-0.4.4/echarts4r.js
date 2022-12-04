@@ -56,9 +56,17 @@ HTMLWidgets.widget({
           mapboxgl.accessToken = x.mapboxToken;
         }
         
-        chart = echarts.init(document.getElementById(el.id), x.theme, {renderer: x.renderer});
+        if(!x.mainOpts)
+          x.mainOpts = [];
+        x.mainOpts.renderer = x.renderer;
+
+        chart = echarts.init(document.getElementById(el.id), x.theme, x.mainOpts);
         
         opts = evalFun(x.opts);
+
+        if(x.morphed){
+          opts = x.opts[0][x.morphed.default]   
+        }
         
         if(x.draw === true)
           chart.setOption(opts);
@@ -80,8 +88,18 @@ HTMLWidgets.widget({
           });
           
           chart.on("globalout", function(e){
-            Shiny.onInputChange(el.id + '_global_out' + ":echarts4rParse", e);
+            Shiny.onInputChange(el.id + '_global_out' + ":echarts4rParse", e, {priority: 'event'});
           });
+
+          if(x.hasOwnProperty('zr')){
+            chart.getZr().on("click", function(e){
+              delete e.stop;
+              delete e.topTarget;
+              delete e.target
+              delete e.event.path;
+              Shiny.setInputValue(el.id + '_clicked_zr' + ":echarts4rParse", e);
+            });
+          }
           
           if(x.hasOwnProperty('capture')){
             chart.on(x.capture, function(e){
@@ -185,6 +203,13 @@ HTMLWidgets.widget({
         if(x.hasOwnProperty('groupDisconnect')){
           echarts.disconnect(x.groupDisconnect);
         }
+        
+        if(x.morphed){
+          opts = x.opts[0];
+          console.log(x.morphed);
+          let fn = eval(x.morphed.callback);
+          fn();
+        }
 
       },
       
@@ -197,11 +222,10 @@ HTMLWidgets.widget({
       },
 
       resize: function(width, height) {
+        if(!chart)
+          return;
 
-        if(chart){
-          chart.resize({width: width, height: height});
-        }
-
+        chart.resize({width: width, height: height});
       }
 
     };
@@ -236,6 +260,10 @@ function get_e_charts_opts(id){
 
 function distinct(value, index, self) { 
   return self.indexOf(value) === index;
+}
+
+function rm_undefined(el){
+  return el != undefined;
 }
 
 if (HTMLWidgets.shinyMode) {
@@ -339,11 +367,11 @@ if (HTMLWidgets.shinyMode) {
     function(data) {
       if (typeof chart != 'undefined') {
         $.ajax({ 
-          url: x.geoJSON, 
+          url: data.geoJSON, 
           dataType: 'json', 
-          async: x.mapAsync,
+          async: data.mapAsync,
           success: function(json){ 
-            echarts.registerMap(x.mapName, json);
+            echarts.registerMap(data.mapName, json);
           } 
         });
         
@@ -368,20 +396,33 @@ if (HTMLWidgets.shinyMode) {
         if(!opts.series)
           opts.series = [];
 
-        data.opts.series.forEach(function(serie){
-          opts.series.push(serie);
-        })
+        if(data.opts.series)
+          data.opts.series.forEach(function(serie){
+            opts.series.push(serie);
+          });
+
+        if(data.opts.color){
+          if(data.opts.appendColor)
+            data.opts.color.forEach(function(color){
+              opts.color.push(color);
+            });
+          else 
+            opts.color = data.opts.color;
+        }
+        
+        if(data.opts.backgroundColor)
+          opts.color = data.opts.backgroundColor;
 
         // legend
-        if(opts.legend.length > 0)
+        if(data.opts.legend && opts.legend.length > 0)
           if(data.opts.legend.data)
             opts.legend[0].data = opts.legend[0].data.concat(data.opts.legend.data);
-
+        
         // x Axis
         if(opts.xAxis){
           if(opts.xAxis[0].data){
             let xaxis = opts.xAxis[0].data.concat(data.opts.xAxis[0].data);
-            xaxis = xaxis.filter(distinct);
+            xaxis = xaxis.filter(distinct).filter(rm_undefined);
             opts.xAxis[0].data = xaxis;
           }
         }
@@ -390,7 +431,7 @@ if (HTMLWidgets.shinyMode) {
         if(opts.yAxis){
           if(opts.yAxis[0].data){
             let yaxis = opts.yAxis[0].data.concat(data.opts.yAxis[0].data);
-            yaxis = yaxis.filter(distinct);
+            yaxis = yaxis.filter(distinct).filter(rm_undefined);
             opts.yAxis[0].data = yaxis;
           }
         }
@@ -401,6 +442,7 @@ if (HTMLWidgets.shinyMode) {
 
   Shiny.addCustomMessageHandler('e_remove_serie_p',
     function(data) {
+      
       var chart = get_e_charts(data.id);
       if (typeof chart != 'undefined') {
         let opts = chart.getOption();
@@ -408,15 +450,22 @@ if (HTMLWidgets.shinyMode) {
         if(data.serie_name){
           let series = opts.series;
           series.forEach(function(s, index){
+            if (typeof s.name == "undefined"){
+             if (s.data[[0]].name == data.serie_name){
+               this.splice(index, 1);
+             }
+            } else {
             if(s.name == data.serie_name){
               this.splice(index, 1);
+            }
             }
           }, series)
           opts.series = series;
         }
 
-        if(data.serie_index)
-          opts.series = opts.series.splice(data.index, 1);
+        if(data.serie_index != null){
+          opts.series = opts.series.splice(data.serie_index, 1);
+        }
 
         chart.setOption(opts, true);
       }

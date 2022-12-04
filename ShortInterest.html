@@ -13,7 +13,8 @@
 
 <title>MarketDashboard</title>
 
-<script src="site_libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -81,6 +82,7 @@ if (window.hljs) {
 
 
 
+
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
 
@@ -105,6 +107,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -162,11 +167,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -195,8 +204,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -204,16 +213,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -372,7 +374,8 @@ Industry
 <tbody>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=BBBY" target="_blank"> BBBY </a>
+<a href="https://www.tradingview.com/chart?symbol=BBBY" target="_blank">
+BBBY </a>
 </td>
 <td style="text-align:left;">
 Bed Bath &amp; Beyond Inc. 
@@ -395,7 +398,8 @@ Retail (Specialty Non-Apparel)
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=CVNA" target="_blank"> CVNA </a>
+<a href="https://www.tradingview.com/chart?symbol=CVNA" target="_blank">
+CVNA </a>
 </td>
 <td style="text-align:left;">
 Carvana Co
@@ -418,7 +422,8 @@ Retail (Specialty Non-Apparel)
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=BYND" target="_blank"> BYND </a>
+<a href="https://www.tradingview.com/chart?symbol=BYND" target="_blank">
+BYND </a>
 </td>
 <td style="text-align:left;">
 Beyond Meat Inc
@@ -441,7 +446,8 @@ Food Processing
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=MSTR" target="_blank"> MSTR </a>
+<a href="https://www.tradingview.com/chart?symbol=MSTR" target="_blank">
+MSTR </a>
 </td>
 <td style="text-align:left;">
 MicroStrategy Inc
@@ -464,7 +470,8 @@ Software &amp; Programming
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=UPST" target="_blank"> UPST </a>
+<a href="https://www.tradingview.com/chart?symbol=UPST" target="_blank">
+UPST </a>
 </td>
 <td style="text-align:left;">
 Upstart Holdings Inc
@@ -487,7 +494,8 @@ Consumer Lending
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=NKLA" target="_blank"> NKLA </a>
+<a href="https://www.tradingview.com/chart?symbol=NKLA" target="_blank">
+NKLA </a>
 </td>
 <td style="text-align:left;">
 Nikola Corporation
@@ -510,7 +518,8 @@ Auto &amp; Truck Manufacturers
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=EVGO" target="_blank"> EVGO </a>
+<a href="https://www.tradingview.com/chart?symbol=EVGO" target="_blank">
+EVGO </a>
 </td>
 <td style="text-align:left;">
 Evgo Inc
@@ -533,7 +542,8 @@ Utilities - Electric
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=W" target="_blank"> W </a>
+<a href="https://www.tradingview.com/chart?symbol=W" target="_blank"> W
+</a>
 </td>
 <td style="text-align:left;">
 Wayfair Inc
@@ -556,7 +566,8 @@ Retailers - Department Stores
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=BLNK" target="_blank"> BLNK </a>
+<a href="https://www.tradingview.com/chart?symbol=BLNK" target="_blank">
+BLNK </a>
 </td>
 <td style="text-align:left;">
 Blink Charging Co
@@ -579,7 +590,8 @@ Utilities - Electric
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=IBRX" target="_blank"> IBRX </a>
+<a href="https://www.tradingview.com/chart?symbol=IBRX" target="_blank">
+IBRX </a>
 </td>
 <td style="text-align:left;">
 Immunitybio Inc
@@ -602,7 +614,8 @@ Biotechnology &amp; Medical Research
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=FUV" target="_blank"> FUV </a>
+<a href="https://www.tradingview.com/chart?symbol=FUV" target="_blank">
+FUV </a>
 </td>
 <td style="text-align:left;">
 Arcimoto Inc
@@ -625,7 +638,8 @@ Auto &amp; Truck Manufacturers
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=BIG" target="_blank"> BIG </a>
+<a href="https://www.tradingview.com/chart?symbol=BIG" target="_blank">
+BIG </a>
 </td>
 <td style="text-align:left;">
 Big Lots, Inc. 
@@ -648,7 +662,8 @@ Retailers - Discount Stores
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=SWTX" target="_blank"> SWTX </a>
+<a href="https://www.tradingview.com/chart?symbol=SWTX" target="_blank">
+SWTX </a>
 </td>
 <td style="text-align:left;">
 SpringWorks Therapeutics Inc
@@ -671,7 +686,8 @@ Biotechnology &amp; Medical Research
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=VERU" target="_blank"> VERU </a>
+<a href="https://www.tradingview.com/chart?symbol=VERU" target="_blank">
+VERU </a>
 </td>
 <td style="text-align:left;">
 Veru Inc
@@ -694,7 +710,8 @@ Personal Products
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=WKHS" target="_blank"> WKHS </a>
+<a href="https://www.tradingview.com/chart?symbol=WKHS" target="_blank">
+WKHS </a>
 </td>
 <td style="text-align:left;">
 Workhorse Group Inc
@@ -717,7 +734,8 @@ Auto &amp; Truck Manufacturers
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=VUZI" target="_blank"> VUZI </a>
+<a href="https://www.tradingview.com/chart?symbol=VUZI" target="_blank">
+VUZI </a>
 </td>
 <td style="text-align:left;">
 Vuzix Corp
@@ -740,7 +758,8 @@ Electronic Equipment &amp; Parts
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=HRTX" target="_blank"> HRTX </a>
+<a href="https://www.tradingview.com/chart?symbol=HRTX" target="_blank">
+HRTX </a>
 </td>
 <td style="text-align:left;">
 Heron Therapeutics Inc
@@ -763,7 +782,8 @@ Biotechnology &amp; Medical Research
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=JWN" target="_blank"> JWN </a>
+<a href="https://www.tradingview.com/chart?symbol=JWN" target="_blank">
+JWN </a>
 </td>
 <td style="text-align:left;">
 Nordstrom, Inc. 
@@ -786,7 +806,8 @@ Retailers - Department Stores
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=LCID" target="_blank"> LCID </a>
+<a href="https://www.tradingview.com/chart?symbol=LCID" target="_blank">
+LCID </a>
 </td>
 <td style="text-align:left;">
 Lucid Group Inc
@@ -809,7 +830,8 @@ Auto &amp; Truck Manufacturers
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=MVIS" target="_blank"> MVIS </a>
+<a href="https://www.tradingview.com/chart?symbol=MVIS" target="_blank">
+MVIS </a>
 </td>
 <td style="text-align:left;">
 Microvision, Inc. 
@@ -832,7 +854,8 @@ Electronic Equipment &amp; Parts
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=BGFV" target="_blank"> BGFV </a>
+<a href="https://www.tradingview.com/chart?symbol=BGFV" target="_blank">
+BGFV </a>
 </td>
 <td style="text-align:left;">
 Big 5 Sporting Goods Corp
@@ -855,7 +878,8 @@ Retailers - Miscellaneous Specialty
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=CNK" target="_blank"> CNK </a>
+<a href="https://www.tradingview.com/chart?symbol=CNK" target="_blank">
+CNK </a>
 </td>
 <td style="text-align:left;">
 Cinemark Holdings, Inc. 
@@ -878,7 +902,8 @@ Leisure &amp; Recreation
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=APPH" target="_blank"> APPH </a>
+<a href="https://www.tradingview.com/chart?symbol=APPH" target="_blank">
+APPH </a>
 </td>
 <td style="text-align:left;">
 Appharvest Inc
@@ -901,7 +926,8 @@ Fishing &amp; Farming
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=FUBO" target="_blank"> FUBO </a>
+<a href="https://www.tradingview.com/chart?symbol=FUBO" target="_blank">
+FUBO </a>
 </td>
 <td style="text-align:left;">
 Fubotv Inc
@@ -924,7 +950,8 @@ Online Services
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=HYZN" target="_blank"> HYZN </a>
+<a href="https://www.tradingview.com/chart?symbol=HYZN" target="_blank">
+HYZN </a>
 </td>
 <td style="text-align:left;">
 Hyzon Motors Inc
@@ -947,7 +974,8 @@ Heavy Machinery &amp; Vehicles
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=SRG" target="_blank"> SRG </a>
+<a href="https://www.tradingview.com/chart?symbol=SRG" target="_blank">
+SRG </a>
 </td>
 <td style="text-align:left;">
 Seritage Growth Properties
@@ -970,7 +998,8 @@ Real Estate Operations
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=BKKT" target="_blank"> BKKT </a>
+<a href="https://www.tradingview.com/chart?symbol=BKKT" target="_blank">
+BKKT </a>
 </td>
 <td style="text-align:left;">
 Bakkt Holdings Inc
@@ -993,7 +1022,8 @@ Fintech - Blockchain &amp; Cryptocurrency
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=AMC" target="_blank"> AMC </a>
+<a href="https://www.tradingview.com/chart?symbol=AMC" target="_blank">
+AMC </a>
 </td>
 <td style="text-align:left;">
 AMC Entertainment Holdings Inc
@@ -1016,7 +1046,8 @@ Leisure &amp; Recreation
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=SDC" target="_blank"> SDC </a>
+<a href="https://www.tradingview.com/chart?symbol=SDC" target="_blank">
+SDC </a>
 </td>
 <td style="text-align:left;">
 SmileDirectClub Inc
@@ -1039,7 +1070,8 @@ Medical Equipment, Supplies &amp; Distribution
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=DNMR" target="_blank"> DNMR </a>
+<a href="https://www.tradingview.com/chart?symbol=DNMR" target="_blank">
+DNMR </a>
 </td>
 <td style="text-align:left;">
 Danimer Scientific Inc
@@ -1062,7 +1094,8 @@ Chemicals - Commodity
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=SPCE" target="_blank"> SPCE </a>
+<a href="https://www.tradingview.com/chart?symbol=SPCE" target="_blank">
+SPCE </a>
 </td>
 <td style="text-align:left;">
 Virgin Galactic Holdings Inc
@@ -1085,7 +1118,8 @@ Aerospace &amp; Defense
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=PETS" target="_blank"> PETS </a>
+<a href="https://www.tradingview.com/chart?symbol=PETS" target="_blank">
+PETS </a>
 </td>
 <td style="text-align:left;">
 Petmed Express Inc
@@ -1108,7 +1142,8 @@ Retail (Drugs)
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=RIDE" target="_blank"> RIDE </a>
+<a href="https://www.tradingview.com/chart?symbol=RIDE" target="_blank">
+RIDE </a>
 </td>
 <td style="text-align:left;">
 Lordstown Motors Corp
@@ -1131,7 +1166,8 @@ Auto &amp; Truck Manufacturers
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=FFIE" target="_blank"> FFIE </a>
+<a href="https://www.tradingview.com/chart?symbol=FFIE" target="_blank">
+FFIE </a>
 </td>
 <td style="text-align:left;">
 Faraday Future Intelligent Ele
@@ -1154,7 +1190,8 @@ Auto &amp; Truck Manufacturers
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://www.tradingview.com/chart?symbol=IGMS" target="_blank"> IGMS </a>
+<a href="https://www.tradingview.com/chart?symbol=IGMS" target="_blank">
+IGMS </a>
 </td>
 <td style="text-align:left;">
 IGM Biosciences Inc
