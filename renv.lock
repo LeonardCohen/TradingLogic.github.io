@@ -1043,7 +1043,7 @@
     },
     "quantmod": {
       "Package": "quantmod",
-      "Version": "0.4.20",
+      "Version": "0.4.26",
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "e8c1ef1a6bc7ea89c1801ab4994b87bb",
